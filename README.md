@@ -70,7 +70,7 @@ To train the model:
 The trained model is evaluated on the test set using the following metrics:
 - **IoU (Intersection over Union)**
 - **Macro average F1-score**
-- 
+  
 
 ### **Results**
 
