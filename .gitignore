@@ -1,0 +1,4 @@
+datasets/allPatches/*
+datasets/normalized/*
+datasets/split/*
+results/*
