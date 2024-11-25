@@ -17,22 +17,16 @@ class Custom(nn.Module):
     def forward(self, x):
         x = self.input_layer(x)
         return self.unet(x)
+    
 def initialize_model(encoder_name, in_channels, num_classes, encoder_weights, device):
-    # model = UnetPlusPlus(
-    #     encoder_name=encoder_name,
-    #     in_channels=in_channels,
-    #     encoder_weights=encoder_weights,
-    #     classes=num_classes,
-    #     encoder_depth=5,
-    #     decoder_channels=[256, 128, 64, 32, 16],
-    #     decoder_use_batchnorm=True,
-    #     decoder_attention_type='scse'
-    # ).to(device)
-
-    model = Unet(
+    model = UnetPlusPlus(
         encoder_name=encoder_name,
-        encoder_weights=encoder_weights,
         in_channels=in_channels,
-        classes=num_classes
+        encoder_weights=encoder_weights,
+        classes=num_classes,
+        encoder_depth=5,
+        decoder_channels=[256, 128, 64, 32, 16],
+        decoder_use_batchnorm=True,
+        decoder_attention_type='scse'
     ).to(device)
     return model

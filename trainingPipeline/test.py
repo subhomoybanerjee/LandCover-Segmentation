@@ -1,7 +1,7 @@
 import torch
 import sys
 sys.path.append('../')
-from utils import LOSS,EVAL_SCORES
+from utils import LOSS,EVAL_SCORES,l1_regularization
 def testing(model, dataset_loader, num_classes,device,loss_fn):
     model.eval()
     loss = 0.0
@@ -12,7 +12,7 @@ def testing(model, dataset_loader, num_classes,device,loss_fn):
             images, masks = images.to(device), masks.to(device)
             outputs = model(images)
             outputs = outputs.contiguous()
-            loss_temp=LOSS(loss_fn,outputs,masks)
+            loss_temp=LOSS(loss_fn,outputs,masks) +l1_regularization(model)
             loss += loss_temp.item()
 
             per_batch_iou,per_batch_f1 = EVAL_SCORES(outputs, masks, num_classes)

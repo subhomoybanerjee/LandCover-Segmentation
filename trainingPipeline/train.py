@@ -2,7 +2,7 @@ import wandb
 from .test import testing
 import sys
 sys.path.append('../')
-from utils import LOSS,EVAL_SCORES
+from utils import LOSS,EVAL_SCORES,l1_regularization
 def fit(model, train_loader, val_loader, device, loss_fn,
         num_epochs,early_stopping,optimizer,scheduler,wb,num_classes):
     train_losses, val_losses = [], []
@@ -23,7 +23,7 @@ def fit(model, train_loader, val_loader, device, loss_fn,
             outputs = model(images)
             outputs = outputs.contiguous()
 
-            loss = LOSS(loss_fn,outputs,masks)
+            loss = LOSS(loss_fn,outputs,masks) + l1_regularization(model)
 
             loss.backward()
             optimizer.step()

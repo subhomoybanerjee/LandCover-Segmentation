@@ -71,7 +71,7 @@ def main():
     encoder_name = 'resnet34'
     print(f'Loading encoder: {encoder_name}')
 
-    model=initialize_model(encoder_name,len(BANDS),num_classes,None,device)
+    model=initialize_model(encoder_name=encoder_name,in_channels=len(BANDS),num_classes=num_classes,encoder_weights="imagenet", device=device)
     print(f'Architecture loaded: {model._get_name()}')
 
     wb = False
@@ -94,7 +94,7 @@ def main():
     loss_fn = [loss_fn_Dice, loss_fn_Jaccard, loss_fn_Focal]
     print(f'Loss functions loaded: {[i._get_name() for i in loss_fn]}')
 
-    optimizer = Adam(model.parameters(), lr=1e-3)
+    optimizer = Adam(model.parameters(), lr=1e-3,weight_decay=0.01)
     print(f'Optimizers loaded: {optimizer.__class__.__name__}')
 
     scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.75, patience=5, verbose=True, min_lr=1e-6)
