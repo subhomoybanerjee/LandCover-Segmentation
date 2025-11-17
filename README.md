@@ -85,9 +85,3 @@ The project supports:
 * Improved environmental decision-making for carbon and ecosystem management.
 
 ---
-
-If you want, I can also generate:
-
-* A **diagram or architecture figure** for the README
-* A short **GitHub description**
-* A version tailored for recruiters instead of technical readers
